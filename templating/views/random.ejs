@@ -6,7 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Random</title>
   </head>
+
   <body>
     <h1><%= randomNum %></h1>
+    <!-- first Way -->
+    <% if(randomNum % 2 === 0) { %>
+    <h1>Even</h1>
+    <% } else { %>
+    <h1>Odd</h1>
+    <% } %>
+    <!-- second Way -->
+    <% let isEven = String; if (randomNum % 2 === 0) { isEven = 'Even' } else {
+    isEven = 'Odd' } %>
+    <h1><%= isEven %></h1>
+    <!-- third Way -->
+    <h1><%= randomNum % 2 === 0 ? 'Even' : 'Odd' %></h1>
   </body>
 </html>
