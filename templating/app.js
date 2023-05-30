@@ -9,16 +9,18 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const port = 3000;
 
+app.use(express.static(path.join(__dirname, "public")));
+
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
 
 app.get("/", (req, res) => {
-  res.render("home");
+  res.render("home", { name: "home" });
 });
 
 app.get("/cats", (req, res) => {
   const cats = ["caki", "soso", "susi"];
-  res.render("cats", { cats });
+  res.render("cats", { cats, name: "cats" });
 });
 
 app.get("/r/:subreddit", (req, res) => {
@@ -33,7 +35,7 @@ app.get("/r/:subreddit", (req, res) => {
 
 app.get("/random", (req, res) => {
   const randomNum = Math.floor(Math.random() * 10) + 1;
-  res.render("random", { randomNum: randomNum });
+  res.render("random", { randomNum: randomNum, name: "random" });
 });
 
 app.listen(port, () => {
