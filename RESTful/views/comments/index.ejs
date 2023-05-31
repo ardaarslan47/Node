@@ -9,9 +9,10 @@
 <body>
     <ul>
         <% for(let comment of comments) { %>
-            <li><%= comment.comment %> - <b><%= comment.username %></b> <a href=<%= `/comments/${comment.id}` %>>EDIT</a></li>
-        <% } %>
-    </ul>
-    <a href="/comments/new">Create NEW comment</a>
-</body>
+            <li><%= comment.comment %> - <b><%= comment.username %></b> <a href=<%= `/comments/${comment.id}` %>>Details</a> <button id=<%= `edit${comment.id}` %>>EDIT</button></li>
+            <% } %>
+        </ul>
+        <a href="/comments/new">Create NEW comment</a>
+        <script src="js/app.js" ></script>
+    </body>
 </html>

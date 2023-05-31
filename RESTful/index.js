@@ -1,6 +1,7 @@
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
+import { v4 as getID } from "uuid";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -19,27 +20,27 @@ const comments = [
   {
     username: "Ozan",
     comment: "NABER!!!!!",
-    id: "1",
+    id: getID(),
   },
   {
     username: "Arda",
     comment: "Sana ne",
-    id: "2",
+    id: getID(),
   },
   {
     username: "Azize",
     comment: "Saman ye",
-    id: "3",
+    id: getID(),
   },
   {
     username: "CAMAL",
     comment: "Ben tokum sen ye",
-    id: "4",
+    id: getID(),
   },
   {
     username: "Volkan Konak",
     comment: "Merhaba ben volkan konak",
-    id: "5",
+    id: getID(),
   },
 ];
 
@@ -61,10 +62,17 @@ app.get("/comments/:id", (req, res) => {
   }
 });
 
+app.patch("/comments/:id", (req, res) => {
+  const { id } = req.params;
+  const newComment = req.body.comment;
+  const _comment = comments.find((x) => x.id === id);
+  _comment.comment = newComment;
+});
+
 app.post("/comments", (req, res) => {
   const { username, comment } = req.body;
   if (username !== "" && comment !== "") {
-    comments.push({ username, comment });
+    comments.push({ username, comment, id: getID() });
   }
   res.redirect("comments");
 });
